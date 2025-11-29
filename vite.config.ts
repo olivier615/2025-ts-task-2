@@ -1,28 +1,27 @@
-import { fileURLToPath, resolve, URL } from 'node:url'
-
+import { fileURLToPath, URL } from 'node:url'
 import vue from '@vitejs/plugin-vue'
 import { defineConfig } from 'vite'
 import vueDevTools from 'vite-plugin-vue-devtools'
 
-// https://vite.dev/config/
 export default defineConfig({
   plugins: [vue(), vueDevTools()],
+
+
+  // ✅ GitHub Pages 必須設定 base
+  base: '/2025-ts-task-2/',
+
+
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
   },
+
+  // ✅ 完全不要自訂 rollup input / output
   build: {
     target: 'esnext',
-    rollupOptions: {
-      input: {
-        main: resolve(__dirname, 'index.html'),
-      },
-      output: {
-        dir: resolve(__dirname, 'dist'),
-      },
-    },
   },
+
   css: {
     preprocessorOptions: {
       scss: {
