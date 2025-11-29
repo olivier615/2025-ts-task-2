@@ -10,12 +10,12 @@ const router = createRouter({
       component: Dashboard,
       children: [
         {
-          path: '/product-management',
+          path: 'product-management',
           name: 'product-management',
           component: () => import('@/views/ProductManagement.vue'),
         },
         {
-          path: '/order-management',
+          path: 'order-management',
           name: 'order-management',
           component: () => import('@/views/OrderManagement.vue'),
         },
