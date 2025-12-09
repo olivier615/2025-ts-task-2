@@ -50,11 +50,11 @@ export type ProductData = {
 // - category: 分類 (字串)
 export type Pagination = {
   // 在這裡加上型別定義，將 unknown 替換為正確的型別
-  total_pages: number,
-  current_page: number,
-  has_pre: boolean,
-  has_next: boolean,
-  category: string,
+  total_pages: number
+  current_page: number
+  has_pre: boolean
+  has_next: boolean
+  category: string
 }
 
 // TODO: 定義建立商品參數型別
@@ -77,18 +77,18 @@ export type CreateProductParams = {
 // 提示：編輯商品需要 id 和 data 物件
 export type EditProductParams = {
   // 在這裡加上型別定義，將 unknown 替換為正確的型別
-  id: string,
+  id: string
   data: {
-    title: string,
-    category: string,
-    origin_price: number,
-    price: number,
-    unit: string,
-    description: string,
-    content: string,
-    is_enabled: number,
-    imageUrl: string,
-    imagesUrl: string[],
+    title: string
+    category: string
+    origin_price: number
+    price: number
+    unit: string
+    description: string
+    content: string
+    is_enabled: number
+    imageUrl: string
+    imagesUrl: string[]
   }
 }
 
@@ -103,7 +103,7 @@ export type GetProductsResponse = {
   success: boolean
   products: ProductData[]
   pagination: Pagination
-  messages: unknown[]
+  messages: string[]
 }
 
 // TODO: 定義訊息回應基本型別

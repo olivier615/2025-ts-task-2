@@ -90,9 +90,24 @@ const tempProduct = ref<ProductData>(getInitialProductData())
 const openModal = (product: ProductData | null = null) => {
   if (product) {
     tempProduct.value = { ...product, imagesUrl: product.imagesUrl ? [...product.imagesUrl] : [''] }
+    productModalRef.value?.openModal()
+  } else {
+    tempProduct.value = {
+      id: '',
+      title: '',
+      origin_price: 0,
+      price: 0,
+      category: '',
+      unit: '',
+      num: 0,
+      content: '',
+      description: '',
+      is_enabled: 1,
+      imageUrl: '',
+      imagesUrl: [''],
+    }
+    productModalRef.value?.openModal()
   }
-
-  productModalRef.value?.openModal()
 }
 
 // TODO: 為 openDeleteModal 函式加上型別註解
@@ -141,32 +156,17 @@ const handleDeleteProduct = async (productId: string): Promise<void> => {
               <td>{{ product.origin_price }}</td>
               <td>{{ product.price }}</td>
               <td class="text-center">
-                <div
-                  class="form-check form-switch d-flex justify-content-center align-items-center"
-                >
-                  <input
-                    readonly
-                    class="form-check-input"
-                    style="pointer-events: none"
-                    type="checkbox"
-                    id="flexSwitchCheckDefault1"
-                    :checked="Boolean(product.is_enabled)"
-                  />
+                <div class="form-check form-switch d-flex justify-content-center align-items-center">
+                  <input readonly class="form-check-input" style="pointer-events: none" type="checkbox"
+                    id="flexSwitchCheckDefault1" :checked="Boolean(product.is_enabled)" />
                 </div>
               </td>
               <td class="text-nowrap">
-                <button
-                  @click="openModal(product)"
-                  type="button"
-                  class="btn btn-sm btn-outline-dark rounded-lg me-2"
-                >
+                <button @click="openModal(product)" type="button" class="btn btn-sm btn-outline-dark rounded-lg me-2">
                   編輯
                 </button>
-                <button
-                  @click="openDeleteModal(product.id)"
-                  type="button"
-                  class="btn btn-sm btn-outline-danger rounded-lg"
-                >
+                <button @click="openDeleteModal(product.id)" type="button"
+                  class="btn btn-sm btn-outline-danger rounded-lg">
                   刪除
                 </button>
               </td>
@@ -178,37 +178,20 @@ const handleDeleteProduct = async (productId: string): Promise<void> => {
       <nav class="d-flex justify-content-center mt-4">
         <ul class="pagination">
           <li class="page-item">
-            <button
-              @click="currentPage = String(Number(currentPage) - 1)"
-              :disabled="!pagination?.has_pre"
-              type="button"
-              class="page-link"
-              :class="{ disabled: !pagination?.has_pre }"
-              aria-label="Previous"
-            >
+            <button @click="currentPage = String(Number(currentPage) - 1)" :disabled="!pagination?.has_pre"
+              type="button" class="page-link" :class="{ disabled: !pagination?.has_pre }" aria-label="Previous">
               <span aria-hidden="true">&laquo;</span>
             </button>
           </li>
           <li v-for="pageNum in pagination?.total_pages" class="page-item">
-            <button
-              @click="currentPage = pageNum.toString()"
-              :disabled="currentPage === pageNum.toString()"
-              type="button"
-              class="page-link"
-              :class="{ active: currentPage === pageNum.toString() }"
-            >
+            <button @click="currentPage = pageNum.toString()" :disabled="currentPage === pageNum.toString()"
+              type="button" class="page-link" :class="{ active: currentPage === pageNum.toString() }">
               {{ pageNum }}
             </button>
           </li>
           <li class="page-item">
-            <button
-              @click="currentPage = String(Number(currentPage) + 1)"
-              :disabled="!pagination?.has_next"
-              class="page-link"
-              :class="{ disabled: !pagination?.has_next }"
-              type="button"
-              aria-label="Next"
-            >
+            <button @click="currentPage = String(Number(currentPage) + 1)" :disabled="!pagination?.has_next"
+              class="page-link" :class="{ disabled: !pagination?.has_next }" type="button" aria-label="Next">
               <span aria-hidden="true">&raquo;</span>
             </button>
           </li>
